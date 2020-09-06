@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://www.cnblogs.com/duanming/p/11830251.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="never">
+    <meta property="og:description" content="【Annotation】本文将从标题八开始，因为前七个标题是关于Git的基本操作，如果对Git的基本操作不了解的话，可以点击下方链接先看一下Git怎么使用。 关于Git的详细使用 八：创建SSH Ke">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Git连接GitHub仓库详解 - 段明 - 博客园</title>
+    <link id="favicon" rel="shortcut icon" href="https://common.cnblogs.com/favicon.ico?v=20200522" type="image/x-icon">
+    
+    <link rel="stylesheet" href="./Git连接GitHub仓库详解 - 段明 - 博客园_files/blog-common.min.css">
+    <link id="MainCss" rel="stylesheet" href="./Git连接GitHub仓库详解 - 段明 - 博客园_files/bundle-red_autumnal_leaves.min.css">
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./Git连接GitHub仓库详解 - 段明 - 博客园_files/bundle-red_autumnal_leaves-mobile.min.css">
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/duanming/rss">
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/duanming/rsd.xml">
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/duanming/wlwmanifest.xml">
+    <script async="" src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/analytics.js.下载"></script><script>
+        var currentBlogId = 559055;
+        var currentBlogApp = 'duanming';
+        var cb_enable_mathjax = false;
+        var isLogined = false;
+        var isBlogOwner = false;
+        var skinName = 'red_autumnal_leaves';
+        var visitorUserId = '';
+    </script>
+        <script>
+            var currentPostDateAdded = '2019-10-29 04:19';
+        </script>
+    <script src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/blog-common.min.js.下载"></script>
+    
+    
+    
+<script src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/pubads_impl_2020082701.js.下载" async=""></script><link rel="preload" href="./Git连接GitHub仓库详解 - 段明 - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/f.txt"></script><link rel="prefetch" href="https://ce5995cd9e1ff24ea9aad8207fbadef9.safeframe.googlesyndication.com/safeframe/1-0-37/html/container.html"><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-37/html/container.html"></head>
+<body>
+    <a name="top"></a>
+    
+    
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+        <a id="lnkBlogLogo" href="https://www.cnblogs.com/duanming/"><img id="blogLogo" src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/logo.gif" alt="返回主页"></a>		
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/duanming/">段明</a>
+</h1>
+<h2>
+
+</h2>
+
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/duanming/">
+首页</a>
+</li>
+<li>
+
+<a id="blog_nav_newpost" class="menu" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E6%AE%B5%E6%98%8E">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/duanming/rss/">
+订阅</a>
+<!--<partial name="./Shared/_XmlLink.cshtml" model="Model" /></li>--></li>
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<span id="stats_post_count">随笔 - 
+58&nbsp; </span>
+<span id="stats_article_count">文章 - 
+0&nbsp; </span>
+<span id="stats-comment_count">评论 - 
+3</span>
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="post_detail">
+    <!--done-->
+    <div id="topics">
+        <div class="post">
+            <h1 class="postTitle">
+                
+<a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/duanming/p/11830251.html">
+    <span>Git连接GitHub仓库详解</span>
+    
+
+
+</a>
+
+            </h1>
+            <div class="clear"></div>
+            <div class="postBody">
+                
+<div id="cnblogs_post_body" class="blogpost-body">
+    <p>&nbsp;</p>
+<!-- flowchart 箭头图标 勿删 -->
+<p>【Annotation】本文将从<strong>标题八</strong>开始，因为前七个标题是关于Git的基本操作，如果对Git的基本操作不了解的话，可以点击下方链接先看一下Git怎么使用。</p>
+<p><a href="https://www.cnblogs.com/duanming/p/11830252.html" rel="nofollow" data-token="f1f07ff3569bec6ee5362957c45bc8f3"><strong>关于Git的详细使用</strong></a></p>
+<h3><a id="SSH_Key_4"></a>八：创建SSH Key</h3>
+<p>1.注册GitHub账号。<br>
+2.创建SSH Key。<code>windows + R</code>键同时按，打开运行命令窗口，输入<code>.</code>进入家目录。<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029162641996.png" alt="在这里插入图片描述"><br>
+输入<code>.</code><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029162721200.png" alt="在这里插入图片描述"><br>
+看看这个目录下有没有<code>id_rsa</code>和<code>id_rsa.pub</code>这两个文件，如果有（那就奇了怪了！），一般第一次使用是没有的，真有的话可以直接跳过下面的命令。</p>
+<p>打开命令行，执行命令：<code>ssh-keygen -t rsa -C "dmneil7o@icloud.com"</code>邮箱是自己GitHub账号;它会让你选择路径，还会让你设置密码，这里最好全部都按照默认，一路回车下去，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029163434970.png" alt="在这里插入图片描述"><br>
+这时候我们再次打开家目录，会发现有一个<code>.ssh</code>文件夹，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029163716555.png" alt="在这里插入图片描述"><br>
+如果上面的命令没有问题的话，也看不到这个文件夹肯定就是<code>隐藏文件显示按钮</code>没有打开，点击<code>查看(View)</code>把<code>隐藏的项目（Hidden items）</code>选项勾上。<br>
+打开<code>.ssh</code>这个文件夹，可以看到两个文件：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029164005866.png" alt="在这里插入图片描述"><br>
+<code>id_rsa</code>是私钥，不能泄露， <code>id_rsa.pub</code>是公钥，可以放心传播。</p>
+<p>3.登录GitHub，打开<code>settings</code>找到<code>SSH Key</code>页面，点击<code>New SSH Key</code>， 填上标题，同时在Key文本框中粘贴<code>id_rsa.pub</code>文件的公钥内容。<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029164429903.png" alt="在这里插入图片描述"><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029164546321.png" alt="在这里插入图片描述"><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029164736208.png" alt="在这里插入图片描述"><br>
+点击<code>Add SSH key</code>之后会跳转到输入密码的界面，我们需要输入GitHub密码来继续：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029165109570.png" alt="在这里插入图片描述"><br>
+接下来我们就可以看到我们新加的SSH key了，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029165245205.png" alt="在这里插入图片描述"></p>
+<h3><a id="_29"></a>九、添加远程库</h3>
+<p>需求是：我们有本地的Git仓库，又想在GitHub中创建一个Git仓库，并且希望这两个仓库进行远程同步，这样GitHub的仓库别人就可以来写作了。<br>
+1.在GitHub上创建一个仓库，在页面右上角<code>➕</code>号选择新的仓库（New repository）；<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029165705431.png" alt="在这里插入图片描述"><br>
+2.填入仓库名称就可以了，直接点创建，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029165952715.png" alt="在这里插入图片描述"><br>
+这时候一个新的仓库就建立完成了，目前这个仓库还是空的<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029170541162.png" alt="在这里插入图片描述"><br>
+页面提示说，我们可以有多种方法初始化这个仓库，我们按照给出的提示在本地仓库中运行下面的命令：<br>
+<code>git remote add origin https://github.com/duanmingpy/helloworld.git</code><br>
+<code>git push -u origin master</code><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029171116939.png" alt="在这里插入图片描述"><br>
+把提示的东西都输入完成之后就可以推送成功了，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029171326815.png" alt="在这里插入图片描述"><br>
+这里使用的几个命令,其中<code>git push</code>命令，实际上是把当前分支master推送到远程。</p>
+<p>因为远程库是空的，第一次推送master增加一个<code>-u</code>参数，这样Git不仅仅会把本地的master分支的内容推送到远程GitHub仓库中新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送和拉取就可以简化命令了。<br>
+我们刷新GitHub仓库的页面，这样就可以看到GitHub上的仓库和本地一模一样了。如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029171833850.png" alt="在这里插入图片描述"><br>
+现在开始，只要本地有commit，就可以使用<code>git push origin master</code>把本地master分支的最新修改交托给GitHub上了，现在就真正意义上的拥有了分布式版本库了。</p>
+<h3><a id="GitHub_49"></a>十、从GitHub上克隆</h3>
+<p>【标题九】讲述了先有本地库更新，后有远程库。<br>
+现在考虑如果远程库有更新，怎么克隆到本地呢？</p>
+<p>1.先准备一个远程库，在GitHub上再新建一个仓库，但是要有文件在，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029172637219.png" alt="在这里插入图片描述"><br>
+创建完成之后如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029172908308.png" alt="在这里插入图片描述"><br>
+现在我们在命令行中进入一个新的空的文件夹中，然后执行克隆语句：<br>
+克隆语句：<code>git clone https://github.com/duanmingpy/remote_repo.git</code>，后面的地址是自己的<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029174609492.png" alt="在这里插入图片描述"><br>
+打开我们拉下来的文件夹就可以看到：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029174829232.png" alt="在这里插入图片描述"></p>
+<h3><a id="_62"></a>十一、创建与合并分支</h3>
+<p>在<a href="https://blog.csdn.net/qq_38727847/article/details/102796482" rel="nofollow" data-token="f1f07ff3569bec6ee5362957c45bc8f3">上篇文章</a>的版本回退上我们就知道了，每次提交，Git都把它们串成一条时间线，这条时间线是一个分支。<br>
+到现在为止，我们还只有一个master主分支，HEAD严格来说是指向master，所以HEAD指向的就是当前分支，就像python中模块的<code>__main__</code>特殊变量一样。<br>
+现在我们来创建新的分支：<br>
+1.查看所有分支命令<code>git branch</code><br>
+2.<code>git checkout -b 分支名</code> 创建并切换到这个分支<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/2019102917581940.png" alt="在这里插入图片描述"><br>
+<code>git checkout</code>命令加上参数<code>-b</code>就代表创建之后切换到，相当于两条命令：<br>
+<code>git branch dy</code> 和 <code>git checkout dy</code> 相当于这两条。<br>
+<code>git branch</code>查看分支，会列出所有分支，当前分支前面有一个星号，上面用到了。</p>
+<p><strong>分支之间的工作</strong><br>
+现在我们在dy分支上，我们查看一下README.md的内容，接着添加一行7777777，再把它添加到版本库。<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029185304971.png" alt="在这里插入图片描述"><br>
+我们在dy分支上完成了提交之后，切换到master分支上查看README.md，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029185700369.png" alt="在这里插入图片描述"><br>
+现在我们想要把dy分支上增加的内容合并到分支master分支上，可以在master分支上使用如下命令：<br>
+<code>git merge dy</code><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/2019102919004163.png" alt="在这里插入图片描述"><br>
+我们可以在执行合并那里看到一句<code>Fast-forword</code>这是因为执行的模式是<code>快进模式</code>，就是直接把master执行了dy的当前提交，所有合并速度快。<br>
+我们现在把dy分支删除：<br>
+<code>git branch -d dy</code><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/2019102919042632.png" alt="在这里插入图片描述"></p>
+<p>暂时先总结一下创建与合并命令：<br>
+查看分支<code>git branch</code><br>
+创建分支<code>git branch name</code><br>
+切换分支<code>git checkout name</code><br>
+创建+切换分支<code>git checkout -b name</code><br>
+合并某分支到当前分支<code>git merge name</code><br>
+删除分支<code>git branch -d name</code></p>
+<hr>
+<p>下面我们考虑：<br>
+如果在dy分支上我们修改提交了新内容，在master上也修改提交了新内容，那么我们在合并的时候取谁的呢？<br>
+还是一步一步来，<br>
+1先创建一个新分支叫做dy，因为刚才把它给删掉了<br>
+2查看一下README.md的内容<br>
+3添加一些新内容<br>
+4提交到版本库<br>
+如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029191320336.png" alt="在这里插入图片描述"><br>
+同样的操作，我们切换到master分支上也添加两行内容：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029191719872.png" alt="在这里插入图片描述"><br>
+提交到版本库之后，我们在master分支上进行合并dy，如下操作：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029192300881.png" alt="在这里插入图片描述"><br>
+我们可以从上面这一张图可以仔细的分析出，两个分支上都做了新的提交，在合并的时候会有冲突，并且分支名也从master变成了<code>master | MERGING</code>， 同时我们<code>cat README.md</code>发现文件内容也变了，在<code>git status</code>上给我们提供了解决方法：<code>git commit</code>；<br>
+Git使用了<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> ; <code>========</code>;<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 分别标记出不同分支修改的内容，我们可以打开文件修改成和主分支一致，然后在<code>master | MERGING</code>这个临时分支上进行<code>git commit</code>。<br>
+使用vscode打开查看：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029192859751.png" alt="在这里插入图片描述"><br>
+vscode默认给我们几个选项，我点击了<code>采用当前更改</code>按钮，变成了master提交的内容了，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/2019102919302787.png" alt="在这里插入图片描述"><br>
+然后回到Git客户端，在<code>master | MERGING</code>分支上查看内容并进行提交操作，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029193601593.png" alt="在这里插入图片描述"><br>
+经过这一系列的操作之后，我们可以通过<code>git log</code>查看分支合并情况：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/2019102919372132.png" alt="在这里插入图片描述"></p>
+<hr>
+<p>分支管理策略：<br>
+通常我们合并分支的时候，Git一般是用Fast forward模式，这种模式下，删除分支之后，会丢掉分支信息，现在我们来使用<code>-no-ff</code>来禁用Fast forward模式。<br>
+1创建一个dev分支。<br>
+2修改README.md内容。<br>
+3添加到暂存区。<br>
+4切换回dy分支。<br>
+5合并dev分支，使用命令<code>git merge -no-ff -m "注释内容" dev</code><br>
+6查看历史记录<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029195017803.png" alt="在这里插入图片描述"><br>
+删除dev之后我们发现在最后的log中还有dev的操作。<br>
+分支策略：master主分支应该是非常稳定的，也是用来发布的新版本，一般情况下干活都不在master分支上干，都是在新建的分支上，干完之后需要发布，或者说新建分支代码稳定之后可以合并到主分支master上。</p>
+<h3><a id="bug_132"></a>十二、bug分支</h3>
+<p>在开发过程中，bug问题是不能避免的，那么有了bug就需要修复，在Git中，由于拥有强大的分支，每个bug我们都可以通过一个临时分支来修复，修复完成之后合并分支，然后将临时的分支删除掉。</p>
+<p>例如我在开发中接到一个404bug的时候，可以临时创建一个404分支来修复。但是我目前在的分支dev的开发工作还没有完成，但是bug需要五个小时内完成，怎么办？这时候Git有一个stash功能，可以将当前工作现场<code>隐藏到后台</code>，等以后再恢复现场继续工作。如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029195959501.png" alt="在这里插入图片描述"><br>
+接下来我们要知道bug是哪个分支上的，比如bug是master分支上的，我就需要再master分支上重新建一个分支：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029200442159.png" alt="在这里插入图片描述"><br>
+修复好bug之后切换到master分支，并合并，最后删除这个临时分支：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029200814630.png" alt="在这里插入图片描述"><br>
+现在又可以回到当前的分支上继续干活了。<br>
+要把我们的现场恢复回来：<br>
+通过<code>git stash list</code>查看隐藏的工作现场，<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029201128122.png" alt="在这里插入图片描述"><br>
+恢复的方式有两种：<br>
+1<code>git stash apply</code>，这种恢复方式恢复后stash内容并不删除，需要使用<code>git stash drop</code>来删除。<br>
+2另一种方式是使用<code>git stash pop</code>，恢复的同时把stash内容也删除了。<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029201450316.png" alt="在这里插入图片描述"></p>
+<h3><a id="_149"></a>十三、多人协作</h3>
+<p>当我们从远程库克隆的时候，实际上Git自动把本地的master分支和远程的master分支对应起来了，并且远程库的默认名称是origin。<br>
+1.查看远程信息<code>git remote</code><br>
+2.查看远程库详细信息<code>git remote -v</code><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029202156861.png" alt="在这里插入图片描述"><br>
+<strong>推送分支</strong><br>
+推送一个分支就是把该分支上所有本地提交到远程库上，推送的时候要制定本地的分支，Git会把该分支推送到远程库对应的远程分支上：<br>
+使用命令<code>git push origin master</code><br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029202609574.png" alt="在这里插入图片描述"><br>
+本地的README.md:<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029202653147.png" alt="在这里插入图片描述"><br>
+执行推送命令：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029202855928.png" alt="在这里插入图片描述"><br>
+推送成功之后我们刷新一下GitHub页面：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029203005225.png" alt="在这里插入图片描述"><br>
+需要推送哪个分支我们就把参数换成分支名就可以了。<br>
+<code>知识补充：</code>一般情况下master分支是主分支，因此要时时刻刻与远程同步；一些修复的bug分支是不需要推送到远程的，只要先在本地合并到主分支上，然后把主分支master推送到远程去即可。</p>
+<p><strong>抓取分支：</strong><br>
+在进行多人协作时，大家都会往master分支上推送各自的修改，现在我们假设有另外一个同事，通过添加SSH Key添加到GitHub上，或者是同一台电脑上另外一个目录克隆。<br>
+先把dy分支也push到GitHub上：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029203944336.png" alt="在这里插入图片描述"><br>
+我们新建一个目录名就叫做：clonedir2<br>
+在这个目录下模仿另外一个同事也进行克隆这个项目：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029204127334.png" alt="在这里插入图片描述"><br>
+这个同事需要在dy分支上做开发，在终端用命令创建一个dy分支，现在就可以在dy分支上进行开发，开发完成后，把dy分支推送到远程库中。<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029204903701.png" alt="在这里插入图片描述"><br>
+同事已经推送到远程了，这里我也改了一下这个文件，也想要推到远程：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029205447655.png" alt="在这里插入图片描述"><br>
+推送失败的原因是同事最近也提交了，提交到有冲突，上面提示我们，先用git pull把最新的提交抓取下来，然后在本地合并，解决冲突之后再推送。<br>
+先要指定本地dy分支与远程origin/dy分支的连接，根据提示设置dy分支和origin/dy的链接，如下：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029210132293.png" alt="在这里插入图片描述"><br>
+我们又看到了熟悉的MERGING临时分支了；<br>
+解决方式和之前是一样的，我先看一下内容，然后修改，然后再继续推送到远程中：<br>
+<img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191029210607130.png" alt="在这里插入图片描述"><br>
+所以：多人协作的工作模式是：<br>
+1可以试图用<code>git push origin branch name</code>推送自己的修改<br>
+2如果推送失败，是因为远程分支比本地更新早，需要先用<code>git pull</code>试图合并。<br>
+3如果合并有冲突，需要解决冲突，并在本地提交，使用<code>git push origin branch name</code></p>
+<hr>
+<p><strong>总结：</strong><br>
+Git基本常用命令如下：<br>
+创建目录<code>mkdir</code><br>
+显示当前目录的路径：<code>pwd</code><br>
+把当前的目录变成可以管理的Git仓库：<code>git init</code><br>
+把xx文件添加到暂存区：<code>git add xx</code><br>
+提交文件：<code>git commit -m "注释"</code><br>
+查看仓库状态<code>git status</code><br>
+查看xx文件修改了哪些内容<code>git diff xx</code><br>
+查看历史记录<code>git log</code><br>
+回退版本<code>git reset --hard HEAD^</code>或者<code>git reset --hard HEAD~50</code><br>
+查看文件<code>cat xx</code><br>
+查看历史记录的版本号id<code>git reflog</code><br>
+把xx文件在工作区的修改全部撤销<code>git checkout -- xx</code><br>
+删除xx文件<code>rm xx</code><br>
+关联一个远程库<code>git remote add origin 地址</code><br>
+把当前master分支推送到远程库<code>git push -u(第一次要用-u 以后不需要) origin master</code><br>
+从远程库中克隆<code>https://github.com/duanmingpy/remote_repo.git</code><br>
+创建dy分支并切换到<code>git checkout –b dy</code><br>
+查看当前所有分支<code>git branch</code><br>
+切换回master分支<code>git checkout master</code><br>
+在当前的分支上合并dy分支<code>git merge dy</code><br>
+删除dy分支<code>git branch –d dy</code><br>
+创建分支<code>git branch name</code><br>
+把当前的工作隐藏起来，等以后恢复现场后继续工作<code>git stash</code><br>
+查看所有被隐藏的文件列表<code>git stash list</code><br>
+恢复被隐藏的文件，但是内容不删除<code>git stash apply</code><br>
+删除文件<code>git stash drop</code><br>
+恢复文件的同时删除文件<code>git stash drop</code><br>
+查看远程库的信息<code>git remote</code><br>
+查看远程库的详细信息<code>git remote -v</code><br>
+把master分支推送到远程库对应的远程分支上<code>git push origin master</code></p>
+<p><strong>觉得不错可以点个赞，加个关注！</strong></p>
+<p>&nbsp;</p>
+</div>
+<div id="MySignature" style="display: block;">最近才从csdn迁徙到博客园，欢迎关注交流！
+代码改变世界！ </div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+
+
+    <div id="blog_post_info">
+<div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(11830251,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+        <a id="green_channel_follow" onclick="follow(&#39;ca87bbae-50a0-4b6b-4c08-08d762c1f88e&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/duanming/" target="_blank"><img src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/20191110111536.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/duanming/">段明</a><br>
+            <a href="https://home.cnblogs.com/u/duanming/followees/">关注 - 1</a><br>
+            <a href="https://home.cnblogs.com/u/duanming/followers/">粉丝 - 7</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;ca87bbae-50a0-4b6b-4c08-08d762c1f88e&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(11830251,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(11830251,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+    <div class="clear"></div>
+    <div id="post_next_prev">
+
+    <a href="https://www.cnblogs.com/duanming/p/11830252.html" class="p_n_p_prefix">« </a> 上一篇：    <a href="https://www.cnblogs.com/duanming/p/11830252.html" title="发布于 2019-10-29 11:30">Git详解使用教程</a>
+    <br>
+    <a href="https://www.cnblogs.com/duanming/p/11830261.html" class="p_n_p_prefix">» </a> 下一篇：    <a href="https://www.cnblogs.com/duanming/p/11830261.html" title="发布于 2019-10-30 08:51">检测一个较大的单链表是否有环</a>
+
+</div>
+</div>
+            </div>
+            <div class="postDesc">posted @ 
+<span id="post-date">2019-10-29 16:19</span>&nbsp;
+<a href="https://www.cnblogs.com/duanming/">段明</a>&nbsp;
+阅读(<span id="post_view_count">3871</span>)&nbsp;
+评论(<span id="post_comment_count">0</span>)&nbsp;
+<a href="https://i.cnblogs.com/EditPosts.aspx?postid=11830251" rel="nofollow">编辑</a>&nbsp;
+<a href="javascript:void(0)" onclick="AddToWz(11830251);return false;">收藏</a></div>
+        </div>
+	    
+	    
+    </div><!--end: topics 文章、评论容器-->
+</div>
+<script src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/highlight.min.js.下载"></script>
+<script>markdown_highlight();</script>
+<script>
+    var allowComments = true, cb_blogId = 559055, cb_blogApp = 'duanming', cb_blogUserGuid = 'ca87bbae-50a0-4b6b-4c08-08d762c1f88e';
+    var cb_entryId = 11830251, cb_entryCreatedDate = '2019-10-29 16:19', cb_postType = 1;
+    loadViewCount(cb_entryId);
+</script><a name="!comments"></a>
+<div id="blog-comments-placeholder"></div>
+<script>
+    var commentManager = new blogCommentManager();
+    commentManager.renderComments(0);
+</script>
+<div id="comment_form" class="commentform">
+    <a name="commentform"></a>
+    <div id="divCommentShow"></div>
+    <div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/duanming/p/11830251.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/duanming/p/11830251.html#top">返回顶部</a></div>
+    <div id="comment_form_container" style="visibility: visible;"><div class="login_tips">
+    注册用户登录后才能发表评论，请 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a>
+     或 
+    <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，
+    <a href="https://www.cnblogs.com/">访问</a> 网站首页。
+</div></div>
+    <div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+    <div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-ucancode&#39;)">【推荐】超50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://activity.huaweicloud.com/828_promotion/index.html?bpName=05e3f29d380010e40fffc0040d9a2660&amp;bindType=1" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-杭云&#39;)">【推荐】828企业上云节，亿元上云补贴，华为云更懂企业</a><br><a href="https://brands.cnblogs.com/huawei" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-华为专区&#39;)">【推荐】了不起的开发者，挡不住的华为，园子里的品牌专区</a><br><a href="https://brands.cnblogs.com/agora" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-声网专区&#39;)">【推荐】未知数的距离，毫秒间的传递，声网与你实时互动</a><br><a href="https://developer.aliyun.com/article/721809?utm_content=g_1000088933" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-阿里云开发者社区&#39;)">【推荐】技术人必备的17组成长笔记+1500道面试题</a><br></div>
+    <div id="opt_under_post"></div>
+    <div id="cnblogs_c1" class="c_ad_block">
+        <div id="div-gpt-ad-1592365906576-0" style="width: 300px; height: 250px;" data-google-query-id="CLnc3P7N1OsCFQOQlgodwyUDLg"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="1" data-load-complete="true" src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/saved_resource.html"></iframe></div></div>
+    </div>
+    <div id="under_post_news"><div class="recomm-block"><b>相关博文：</b><br>·  <a title="Git和Github的基本操作" href="https://www.cnblogs.com/haiyan123/p/7989167.html" target="_blank" onclick="clickRecomItmem(7989167)">Git和Github的基本操作</a><br>·  <a title="github创建远程仓库" href="https://www.cnblogs.com/gregoryli/p/7841032.html" target="_blank" onclick="clickRecomItmem(7841032)">github创建远程仓库</a><br>·  <a title="git使用教程及github远程仓库管理" href="https://www.cnblogs.com/jaume/p/6608044.html" target="_blank" onclick="clickRecomItmem(6608044)">git使用教程及github远程仓库管理</a><br>·  <a title="github常用命令汇总" href="https://www.cnblogs.com/TaylorApril/p/6815142.html" target="_blank" onclick="clickRecomItmem(6815142)">github常用命令汇总</a><br>·  <a title="Git系列①之仓库管理互联网托管平台github.com的使用" href="https://www.cnblogs.com/reblue520/p/7089054.html" target="_blank" onclick="clickRecomItmem(7089054)">Git系列①之仓库管理互联网托管平台github.com的使用</a><br>»  <a target="_blank" href="https://recomm.cnblogs.com/blogpost/11830251">更多推荐...</a><div id="cnblogs_t5"><a href="https://www.sheca.com/assets/wwx/page3.html?site=bokeyuan" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T5-上海CA-大家签&#39;)">【推荐】电子签名认准大家签，上海CA权威认证</a></div></div></div>
+    <div id="cnblogs_c2" class="c_ad_block">
+        <div id="div-gpt-ad-1592366332455-0" style="width: 468px; height: 60px;" data-google-query-id="CNnf2_7N1OsCFQOQlgodwyUDLg"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" style="border: 0px; vertical-align: bottom;" data-google-container-id="2" data-load-complete="true" src="./Git连接GitHub仓库详解 - 段明 - 博客园_files/saved_resource(1).html"></iframe></div></div>
+    </div>
+    <div id="under_post_kb">
+<div class="itnews c_ad_block">
+    <b>最新 IT 新闻</b>:
+    <br>
+ ·          <a href="https://news.cnblogs.com/n/672236/" target="_blank">Google Magenta项目新增Lo-Fi Player：让你更轻松创建音乐</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/672235/" target="_blank">因Linus Torvalds的不雅言行 Debian项目曾讨论永久禁止他出席会议</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/672234/" target="_blank">“花名”治不好大公司病</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/672233/" target="_blank">腾讯新文创亮相服贸会 阅文落实数字文创产业探索</a>
+        <br>
+ ·          <a href="https://news.cnblogs.com/n/672232/" target="_blank">中芯将"被列黑名单"？投资机构：或利多华为产业链</a>
+        <br>
+    » <a href="https://news.cnblogs.com/" title="IT 新闻" target="_blank">更多新闻...</a>
+</div></div>
+    <div id="HistoryToday" class="c_ad_block"></div>
+    <script type="text/javascript">
+        fixPostBody();
+        deliverBigBanner();
+setTimeout(function() { incrementViewCount(cb_entryId); }, 50);        deliverT2();
+        deliverC1C2();
+        loadNewsAndKb();
+        loadBlogSignature();
+LoadPostCategoriesTags(cb_blogId, cb_entryId);        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+        loadOptUnderPost();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+    </script>
+</div>
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<div id="sidebar_news" class="newsItem"><!--done-->
+<h3 class="catListTitle">公告</h3>
+
+<div id="blog-news">
+    
+    <div id="profile_block">
+        昵称：
+        <a href="https://home.cnblogs.com/u/duanming/">
+            段明
+        </a>
+        <br>
+        园龄：
+        <a href="https://home.cnblogs.com/u/duanming/" title="入园时间：2019-11-10">
+            9个月
+        </a>
+        <br>
+        粉丝：
+        <a href="https://home.cnblogs.com/u/duanming/followers/">
+            7
+        </a>
+        <br>
+        关注：
+        <a href="https://home.cnblogs.com/u/duanming/followees/">
+            1
+        </a>
+        <div id="p_b_follow">
+<a href="javascript:void(0)" onclick="follow(&#39;ca87bbae-50a0-4b6b-4c08-08d762c1f88e&#39;)">+加关注</a></div>
+        <script>getFollowStatus('ca87bbae-50a0-4b6b-4c08-08d762c1f88e');</script>
+    </div>
+</div>
+
+</div>
+
+<div id="sidebar_ad"></div>
+			<div id="blog-calendar" style="">
+
+<table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar" border="0">
+    <tbody>
+        <tr>
+            <td colspan="7">
+                <table class="CalTitle" cellspacing="0" border="0">
+                    <tbody>
+                        <tr>
+                            <td class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2020/08/06&#39;); return false;">&lt;</a>
+                            </td>
+                            <td align="center">2020年9月</td>
+                            <td align="right" class="CalNextPrev">
+                                <a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2020/10/06&#39;); return false;">&gt;</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    <tr>
+        <th class="CalDayHeader" align="center" abbr="日" scope="col">日</th>
+        <th class="CalDayHeader" align="center" abbr="一" scope="col">一</th>
+        <th class="CalDayHeader" align="center" abbr="二" scope="col">二</th>
+        <th class="CalDayHeader" align="center" abbr="三" scope="col">三</th>
+        <th class="CalDayHeader" align="center" abbr="四" scope="col">四</th>
+        <th class="CalDayHeader" align="center" abbr="五" scope="col">五</th>
+        <th class="CalDayHeader" align="center" abbr="六" scope="col">六</th>
+    </tr>
+            <tr>
+                            <td class="CalOtherMonthDay" align="center">30</td>
+                            <td class="CalOtherMonthDay" align="center">31</td>
+                        <td class="" align="center">
+                            1
+                        </td>
+                        <td class="" align="center">
+                            2
+                        </td>
+                        <td class="" align="center">
+                            3
+                        </td>
+                        <td class="" align="center">
+                            4
+                        </td>
+                    <td class="CalWeekendDay" align="center">
+                        5
+                    </td>
+            </tr>
+                <tr>
+                        <td class="CalTodayDay" align="center">
+                            6
+                        </td>
+                            <td class="" align="center">
+                                7
+                            </td>
+                            <td class="" align="center">
+                                8
+                            </td>
+                            <td class="" align="center">
+                                9
+                            </td>
+                            <td class="" align="center">
+                                10
+                            </td>
+                            <td class="" align="center">
+                                11
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            12
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            13
+                        </td>
+                            <td class="" align="center">
+                                14
+                            </td>
+                            <td class="" align="center">
+                                15
+                            </td>
+                            <td class="" align="center">
+                                16
+                            </td>
+                            <td class="" align="center">
+                                17
+                            </td>
+                            <td class="" align="center">
+                                18
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            19
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            20
+                        </td>
+                            <td class="" align="center">
+                                21
+                            </td>
+                            <td class="" align="center">
+                                22
+                            </td>
+                            <td class="" align="center">
+                                23
+                            </td>
+                            <td class="" align="center">
+                                24
+                            </td>
+                            <td class="" align="center">
+                                25
+                            </td>
+                        <td class="CalWeekendDay" align="center">
+                            26
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalWeekendDay" align="center">
+                            27
+                        </td>
+                            <td class="" align="center">
+                                28
+                            </td>
+                            <td class="" align="center">
+                                29
+                            </td>
+                            <td class="" align="center">
+                                30
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                1
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                2
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            3
+                        </td>
+                </tr>
+                <tr>
+                        <td class="CalOtherMonthDay" align="center">
+                            4
+                        </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                5
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                6
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                7
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                8
+                            </td>
+                            <td class="CalOtherMonthDay" align="center">
+                                9
+                            </td>
+                        <td class="CalOtherMonthDay" align="center">
+                            10
+                        </td>
+                </tr>
+    </tbody>
+</table></div><script>loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn">
+<!-- 搜索 -->
+<div id="sidebar_search" class="sidebar-block">
+    <div id="sidebar_search" class="mySearch">
+        <h3 class="catListTitle">搜索</h3>
+        <div id="sidebar_search_box">
+            <div id="widget_my_zzk" class="div_my_zzk">
+                <input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk">
+            </div>
+            <div id="widget_my_google" class="div_my_zzk">
+                <input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 常用链接 -->
+<div id="sidebar_shortcut" class="sidebar-block">
+    <div class="catListLink">
+<h3 class="catListTitle">
+常用链接
+</h3>
+<ul>
+    
+<li><a href="https://www.cnblogs.com/duanming/p/" title="我的博客的随笔列表">我的随笔</a></li>
+<li><a href="https://www.cnblogs.com/duanming/MyComments.html" title="我的发表过的评论列表">我的评论</a></li>
+<li><a href="https://www.cnblogs.com/duanming/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li>
+<li><a href="https://www.cnblogs.com/duanming/RecentComments.html" title="我的博客的评论列表">最新评论</a></li>
+<li><a href="https://www.cnblogs.com/duanming/tag/" title="我的博客的标签列表">我的标签</a></li>
+
+</ul>
+</div>
+
+
+</div>
+
+<!-- 最新随笔 -->
+
+
+
+<!-- 我的标签 -->
+<div id="sidebar_toptags" class="sidebar-block">
+    <div class="catListTag">
+<h3 class="catListTitle">我的标签</h3>
+<ul>
+
+        <li>
+            <a href="https://www.cnblogs.com/duanming/tag/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">源码分析</a>(3)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/duanming/tag/%E7%9F%A5%E8%AF%86%E8%AE%B2%E8%A7%A3/">知识讲解</a>(2)
+        </li>
+        <li>
+            <a href="https://www.cnblogs.com/duanming/tag/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/">编程技巧</a>(2)
+        </li>
+    
+
+</ul>
+</div>
+
+
+</div>
+
+<!-- 积分与排名 -->
+
+
+<!-- 随笔分类、随笔档案、文章分类、新闻分类、相册、链接 -->
+<div id="sidebar_categories">
+    
+        <div id="sidebar_postcategory" class="catListPostCategory sidebar-block">
+            <h3 class="catListTitle">
+                
+随笔分类
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/category/1587646.html" rel="" target="">
+    模型模式(2)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/category/1587067.html" rel="" target="">
+    源码阅读(3)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+        <div id="sidebar_postarchive" class="catListPostArchive sidebar-block">
+            <h3 class="catListTitle">
+                
+随笔档案
+
+
+
+            </h3>
+
+
+            <ul>
+
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/archive/2019/11.html" rel="" target="">
+    2019年11月(12)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/archive/2019/10.html" rel="" target="">
+    2019年10月(22)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/archive/2019/09.html" rel="" target="">
+    2019年9月(6)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/archive/2019/08.html" rel="" target="">
+    2019年8月(15)
+</a>
+ 
+
+                        </li>
+                        <li>
+                            
+<a href="https://www.cnblogs.com/duanming/archive/2019/07.html" rel="" target="">
+    2019年7月(3)
+</a>
+ 
+
+                        </li>
+
+            </ul>
+
+
+        </div>
+
+</div>
+
+<!-- 最新评论 -->
+<div id="sidebar_recentcomments" class="sidebar-block">
+    <div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div class="RecentCommentBlock">
+        <ul>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/duanming/p/11830270.html">1. Re:pandas处理excel的常用方法技巧（上）</a></li>
+                    <li class="recent_comment_body"><p>很棒，很实用，pandas处理excel的常用方法技巧（下）有写吗</p>
+</li>
+                    <li class="recent_comment_author">--shiqiu3</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/duanming/p/11857874.html">2. Re:TCP三次握手四次挥手</a></li>
+                    <li class="recent_comment_body">@ Andy_Lcw4个小时，哈哈哈，中间写的丢了重写的...</li>
+                    <li class="recent_comment_author">--段明</li>
+                    <li class="recent_comment_title"><a href="https://www.cnblogs.com/duanming/p/11857874.html">3. Re:TCP三次握手四次挥手</a></li>
+                    <li class="recent_comment_body">写得真好，我再研究研究，博主写了几个小时啊？</li>
+                    <li class="recent_comment_author">--Andy_Lcw</li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<!-- 阅读排行榜 -->
+<div id="sidebar_topviewedposts" class="sidebar-block">
+    <div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11830298.html">
+                            1. python——float()函数用法(5069)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11830270.html">
+                            2. pandas处理excel的常用方法技巧（上）(4682)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11830251.html">
+                            3. Git连接GitHub仓库详解(3871)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11830252.html">
+                            4. Git详解使用教程(2300)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11830289.html">
+                            5. Python——标识符的命名规则(1736)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 评论排行榜 -->
+<div id="sidebar_topcommentedposts" class="sidebar-block">
+    <div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock">
+        <ul style="word-break:break-all">
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11857874.html">
+                            1. TCP三次握手四次挥手(2)
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.cnblogs.com/duanming/p/11830270.html">
+                            2. pandas处理excel的常用方法技巧（上）(1)
+                        </a>
+                    </li>
+        </ul>
+    </div>
+</div>
+
+
+</div>
+
+<!-- 推荐排行榜 -->
+<div id="sidebar_topdiggedposts" class="sidebar-block">
+    
+<div id="topdigg_posts_wrap">
+    <div class="catListView">
+        <h3 class="catListTitle">推荐排行榜</h3>
+        <div id="TopDiggPostsBlock">
+            <ul style="word-break: break-all">
+                        <li>
+                            <a href="https://www.cnblogs.com/duanming/p/11857874.html">
+                                1. TCP三次握手四次挥手(3)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/duanming/p/11830293.html">
+                                2. python——自行实现sorted函数(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/duanming/p/11830288.html">
+                                3. python——函数的形参和实参、参数(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/duanming/p/11830287.html">
+                                4. python——inspect模块(1)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnblogs.com/duanming/p/11830267.html">
+                                5. python面试看这一篇就够了(1)
+                            </a>
+                        </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div></div>
+                    <script>loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		<!--done-->
+Copyright © 2020 段明
+<br><span id="poweredby">Powered by .NET Core on Kubernetes</span>
+
+
+
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+    
+
+
+</body></html>
